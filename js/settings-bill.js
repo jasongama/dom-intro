@@ -20,48 +20,44 @@
 // * add nothing for invalid values that is not 'call' or 'sms'.
 // * display the latest total on the screen.
 // * check the value thresholds and display the total value in the right color.
-var billItemTypeWithSettings = document.querySelector(".billItemTypeWithSettings");
-var settingBillAddBtn = document.querySelector(".addSettinBtn");
+/*var billItemTypeWithSettings = document.querySelector(".billItemTypeWithSettings");
+var settingBillAddBtn = document.querySelector(".settingBillAddBtn");
 var callTotalSettings= document.querySelector(".callTotalSettings");
 var smsTotalSettings = document.querySelector(".smsTotalSettings");
-var totalSettings = document.querySelector(".totalSettings");
+var totalSettings = document.querySelector(".totalSettings");*/
+var billItemTypeRadioElement = document.querySelector(".billItemTypeRadio");
+var radioBillAddBtnElement = document.querySelector(".radioBillAddBtn");
+var callTotalTwoElement = document.querySelector(".callTotalTwo");
+var smsTotalTwoElement = document.querySelector(".smsTotalTwo");
+var totalTwoElement = document.querySelector(".totalTwo");
 
-var callsTotal = 0;
+var callsTotalTwo = 0;
 var smsTotal = 0;
 
-function radioSettingBillTotal(){
-
-var checkedRadioBtn = document.querySelector("input[name='billItemTypeWithSettings']:checked");
-    if (checkedRadioBtn){
-        var billItemTypeSettings = checkedRadioBtn.value
-        // billItemType will be 'call' or 'sms'
-        if (billItemTypeSettings === "call"){
-            callsTotal += 2.75
+function radioBillTotal(){
+var checkedRadioBtn = document.querySelector("input[name='billItemType']:checked");
+    if (checkedRadioBtn) {
+        var billItemType = checkedRadioBtn.value
+        if (billItemType === "call"){
+            callsTotalTwo += 2.75
         }
-        else if (billItemTypeSettings === "sms"){
+        else if (billItemType === "sms"){
             smsTotal += 0.75;
         }
     }
     
-    //update the totals that is displayed on the screen.
-    callTotalSettings.innerHTML = callsTotal.toFixed(2);
-    smsTotalSettings .innerHTML = smsTotal.toFixed(2);
-    var totalCost = callsTotal + smsTotal;
-    totalSettings.innerHTML = totalCost.toFixed(2);
+    callTotalTwoElement.innerHTML = callsTotalTwo.toFixed(2);
+    smsTotalTwoElement.innerHTML = smsTotal.toFixed(2);
+    var totalCost = callsTotalTwo + smsTotal;
+    totalTwoElement.innerHTML = totalCost.toFixed(2);
 
-    if (totalCost >= 30){
-        
-        totalSettings.classList.add("warning");
-    }
     if (totalCost >= 50){
-        
-        totalSettings.classList.add("danger");
+        totalTwoElement.classList.add("danger");
+    }
+    if (totalCost >= 30){
+        totalTwoElement.classList.add("warning");
     }
 }
 
-settingBillAddBtn.addEventListener('click', radioSettingBillTotal);
-
-
-
-
+radioBillAddBtnElement.addEventListener('click', radioBillTotal);
 
