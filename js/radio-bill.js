@@ -18,13 +18,16 @@ var totalTwoElement = document.querySelector(".totalTwo");
 
 var callsTotalTwo = 0;
 var smsTotal = 0;
-
+console.log(radioBillAddBtnElement);
 function radioBillTotal(){
 var checkedRadioBtn = document.querySelector("input[name='billItemType']:checked");
+console.log(checkedRadioBtn);
     if (checkedRadioBtn) {
         var billItemType = checkedRadioBtn.value
+        
+
         if (billItemType === "call"){
-            callsTotalTwo += 2.75
+            callsTotalTwo += 2.75;
         }
         else if (billItemType === "sms"){
             smsTotal += 0.75;
@@ -43,5 +46,7 @@ var checkedRadioBtn = document.querySelector("input[name='billItemType']:checked
         totalTwoElement.classList.add("warning");
     }
 }
+
+
 
 radioBillAddBtnElement.addEventListener('click', radioBillTotal);
