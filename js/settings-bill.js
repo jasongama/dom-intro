@@ -27,52 +27,108 @@ var callTotalSettingsElement = document.querySelector(".callTotalSettings");
 var smsTotalSettingsElement = document.querySelector(".smsTotalSettings");
 var totalSettingsElement = document.querySelector(".totalSettings");
 
+var updateSettings= document.querySelector(".updateSettings");
+var callCostSetting = document.querySelector(".callCostSetting");
+//console.log(callCostSetting.value)
+var smsCostSetting=document.querySelector(".smsCostSetting");
+var warningLevelSettingElement=document.querySelector(".warningLevelSetting");
+var criticalLevelSettingElement=document.querySelector(".criticalLevelSetting");
+
+
 var callTotaltwoSettings = 0;
 var smsTotaltwoSettings = 0;
-
-
+var callCost = 0;
+var smsCost = 0;
+var warningLevel = 0;
+var criticalLevel = 0;
+var totalCostSettings = 0;
 
 function BillWithSettings(){
 
 var checkedRadioBtn = document.querySelector("input[name='billItemTypeWithSettings']:checked");
+
 var checkedRadioBtnSettings =  checkedRadioBtn.value;
-//console.log(checkedRadioBtnSettings)
+
     if (checkedRadioBtn) {
         
         var billItemTypeWithSettings = checkedRadioBtn.value
+    
         if (billItemTypeWithSettings === "call"){
-            callTotaltwoSettings += 2.75
+            callTotaltwoSettings += callCost;
         }
         else if (billItemTypeWithSettings === "sms"){
-            smsTotaltwoSettings += 0.75;
+            smsTotaltwoSettings += smsCost;
         }
     }
-  
+    //console.log(callTotaltwoSettings)
    callTotalSettingsElement.innerHTML = callTotaltwoSettings.toFixed(2);
         smsTotalSettingsElement.innerHTML = smsTotaltwoSettings.toFixed(2);
-     var totalCostSettings = callTotaltwoSettings + smsTotaltwoSettings;
+     totalCostSettings = callTotaltwoSettings + smsTotaltwoSettings;
     totalSettingsElement.innerHTML = totalCostSettings.toFixed(2);
 
-     if (totalCostSettings >= 50){
+     if (totalCostSettings >= criticalLevel){
         totalSettingsElement.classList.add("danger");
     }
-     if (totalCostSettings >= 30){
+     if (totalCostSettings >= warningLevel ){
         totalSettingsElement.classList.add("warning");
+        
+    }
+
+    if (totalCostSettings < warningLevel ){
+        totalSettingsElement.classList.remove("warning");
+    }
+    if (totalCostSettings >= criticalLevel){
+       
+        radioBillSettingsAddBtn.disabled = true;
+        
     }
 }
-var updateSettingsAddBtn= document.querySelectorAll(".updateSettingsAddBtn");
-var callCostSettingElement=document.querySelectorAll(".callCostSetting");
-var smsCostSettingElement=document.querySelectorAll(".smsCostSetting");
-var warningLevelSettingElement=document.querySelectorAll(".warningLevelSetting");
-var criticalLevelSettingElement=document.querySelectorAll(".criticalLevelSetting");
 
 
-var callTotaltwoSettings = 0;
-var smsTotaltwoSettings = 0;
+
 
 function settings(){
 
+     callCost = Number(callCostSetting.value);
+     smsCost = Number(smsCostSetting.value) ;
+    //console.log(smsCost);
+     warningLevel =  warningLevelSettingElement.value;
+    criticalLevel=  criticalLevelSettingElement.value;
+
+    callCostSetting.innerHTML = callTotaltwoSettings.toFixed(2);
+    smsCostSetting.innerHTML = smsTotaltwoSettings.toFixed(2);
+  totalCostSettings = callTotaltwoSettings + smsTotaltwoSettings;
+totalSettingsElement.innerHTML = totalCostSettings.toFixed(2);
+if (totalCostSettings < criticalLevel){
+       
+    radioBillSettingsAddBtn.disabled = false;
+    
+}
+if (totalCostSettings >= criticalLevel){
+    radioBillSettingsAddBtn.disabled = true;
+}
+if (totalCostSettings >= criticalLevel){
+    totalSettingsElement.classList.add("danger");
+    totalSettingsElement.classList.remove("warning");
+}
+ if (totalCostSettings >= warningLevel ){
+    totalSettingsElement.classList.add("warning");
+    totalSettingsElement.classList.remove("danger");
+
+}
+
+if (totalCostSettings < warningLevel){
+    totalSettingsElement.classList.remove("warning");
+    totalSettingsElement.classList.remove("danger");
+
+}
+if (criticalLevel < totalCostSettings){
+    totalSettingsElement.classList.remove("warning");
+    totalSettingsElement.classList.add("danger");
+
+}
 
 }
 radioBillSettingsAddBtn.addEventListener('click', BillWithSettings);
-updateSettingsAddBtn.addEventListener('click', settings );
+
+updateSettings.addEventListener("click", settings );
