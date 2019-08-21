@@ -16,12 +16,17 @@ var callTotalTwoElement = document.querySelector(".callTotalTwo");
 var smsTotalTwoElement = document.querySelector(".smsTotalTwo");
 var totalTwoElement = document.querySelector(".totalTwo");
 
+
+var radioNum = FactoryRadioBillText();
+
 var callsTotalTwo = 0;
 var smsTotal = 0;
-console.log(radioBillAddBtnElement);
+
+
+
 function radioBillTotal(){
 var checkedRadioBtn = document.querySelector("input[name='billItemType']:checked");
-console.log(checkedRadioBtn);
+
     if (checkedRadioBtn) {
         var billItemType = checkedRadioBtn.value
         
@@ -34,10 +39,9 @@ console.log(checkedRadioBtn);
         }
     }
     
-    callTotalTwoElement.innerHTML = callsTotalTwo.toFixed(2);
-    smsTotalTwoElement.innerHTML = smsTotal.toFixed(2);
-    var totalCost = callsTotalTwo + smsTotal;
-    totalTwoElement.innerHTML = totalCost.toFixed(2);
+    callTotalTwoElement.innerHTML = radioNum.radioCall();
+    smsTotalTwoElement.innerHTML = radioNum.radioSms();
+    totalTwoElement.innerHTML = radioNum.radioBillTotal();
 
     if (totalCost >= 50){
         totalTwoElement.classList.add("danger");
