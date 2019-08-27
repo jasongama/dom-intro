@@ -22,34 +22,32 @@ var radioNum = FactoryRadioBillText();
 var callsTotalTwo = 0;
 var smsTotal = 0;
 
+var templateSource = document.querySelector(".userTextTemplate").innerHTML;
+
+// compile the template
+var userTemplate = Handlebars.compile(templateSource);
+
+var userDataElem = document.querySelector(".userData2"); 
 
 
 function radioBillTotal(){
 var checkedRadioBtn = document.querySelector("input[name='billItemType']:checked");
 
-    if (checkedRadioBtn) {
-        var billItemType = checkedRadioBtn.value
-        
+        radioNum.billRadioText(checkedRadioBtn.value);
+var color = radioNum.colourIndicate();
 
-        if (billItemType === "call"){
-            callsTotalTwo += 2.75;
-        }
-        else if (billItemType === "sms"){
-            smsTotal += 0.75;
-        }
-    }
-    
-    callTotalTwoElement.innerHTML = radioNum.radioCall();
-    smsTotalTwoElement.innerHTML = radioNum.radioSms();
-    totalTwoElement.innerHTML = radioNum.radioBillTotal();
+var userData2HTML = userTemplate({
+    call :"R" + radioNum.radioCall(),
+    sms : 'R' + radioNum.radioSms(),
+    total : 'R'  + radioNum.radioBillTotal(),
+    color
+});
+userDataElem.innerHTML = userData2HTML;
 
-    if (totalCost >= 50){
-        totalTwoElement.classList.add("danger");
-    }
-    if (totalCost >= 30){
-        totalTwoElement.classList.add("warning");
-    }
+
+
 }
+
 
 
 

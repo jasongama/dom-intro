@@ -25,10 +25,10 @@ function FactoryTextBill() {
         return billtotal.toFixed(2);
     }
      function colourIndicate(){
-        if (billtotal > 30) {
+        if (billTotals() > 30 && billTotals()< 50) {
             return "warning";
         }
-        if(billtotal > 50){
+        if(billTotals() > 50){
             return "danger"
         }
      }

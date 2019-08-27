@@ -1,16 +1,18 @@
 function FactoryRadioBillText() {
-    var billTotal = 0;
+    var billNumTotal = 0;
     var call = 0;
     var sms = 0;
 
     function billRadioText(radioText) {
-        var billtext = radioText;
-        if (billtext === "call") {
+        var RadioBillText= radioText;
+        if ( RadioBillText === "call") {
             call += 2.75
-        } else if (billtext === "sms") {
+        } else if ( RadioBillText === "sms") {
             sms += 0.75;
         }
-        billtotal = call + sms;
+        billNumTotal = call + sms;
+        
+        
     }
 
     function radioCall() {
@@ -23,15 +25,23 @@ function FactoryRadioBillText() {
     }
 
     function radioBillTotal() {
-        return billTotal.toFixed(2);
+        return  billNumTotal.toFixed(2);
     }
-
+    function colourIndicate(){
+        if (radioBillTotal() > 30 && radioBillTotal()< 50) {
+            return "warning";
+        }
+        if(radioBillTotal() > 50){
+            return "danger"
+        }
+     }
 
 
     return {
         billRadioText,
         radioCall,
         radioSms,
-        radioBillTotal
+        radioBillTotal,
+        colourIndicate
     }
 }

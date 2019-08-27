@@ -20,21 +20,46 @@ var totalOne = document.querySelector(".totalOne");
 
 var callsTotal1 = 0;
 var smsTotal = 0;
-function textBillTotal(){
-billcost.textBill(billTypeText.value)
+// function textBillTotal(){
+//
     
-    callTotalOne.innerHTML =  billcost.billCallNum();
-    smsTotalOne.innerHTML = billcost.billSmsNum();
-    totalOne.innerHTML = billCost.billTotals();
+//     callTotalOne.innerHTML =  billcost.billCallNum();
+//     smsTotalOne.innerHTML = billcost.billSmsNum();
+//     totalOne.innerHTML = billcost.billTotals();
 
-    if (totalCost >= 30){
+//     if (billcost.billTotals() >= 30){
         
-        totalOne.classList.add("warning");
-    }
-    if (totalCost >= 50){
+//         totalOne.classList.add("warning");
+//     }
+//     if (billcost.billTotals() >= 50){
         
-        totalOne.classList.add("danger");
-    }
+//         totalOne.classList.add("danger");
+//     }
+var templateSource = document.querySelector(".userTextTemplate").innerHTML;
+
+// compile the template
+var userTextTemplate = Handlebars.compile(templateSource);
+
+var userTextDataElem = document.querySelector(".textData"); 
+
+function jason(){
+
+billcost.textBill(billTypeText.value)
+var color = billcost.colourIndicate();
+// compile the template
+var userTextDataHTML = userTextTemplate({
+    call :"R" + billcost.billCallNum(),
+    sms : 'R' + billcost.billSmsNum(),
+    total : 'R'  + billcost.billTotals(),
+    color
+});
+userTextDataElem.innerHTML = userTextDataHTML;
+
 }
 
-addToBillBtn.addEventListener('click', textBillTotal);
+
+
+
+// }
+
+addToBillBtn.addEventListener('click', jason);
