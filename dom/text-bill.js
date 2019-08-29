@@ -16,7 +16,7 @@ var callTotalOne= document.querySelector(".callTotalOne");
 var smsTotalOne = document.querySelector(".smsTotalOne");
 var totalOne = document.querySelector(".totalOne");
  var billcost = FactoryTextBill();
-
+ 
 
 var callsTotal1 = 0;
 var smsTotal = 0;
@@ -42,7 +42,9 @@ var userTextTemplate = Handlebars.compile(templateSource);
 
 var userTextDataElem = document.querySelector(".textData"); 
 
-function jason(){
+
+textBillFact()
+function textBillFact(){
 
 billcost.textBill(billTypeText.value)
 var color = billcost.colourIndicate();
@@ -62,4 +64,4 @@ userTextDataElem.innerHTML = userTextDataHTML;
 
 // }
 
-addToBillBtn.addEventListener('click', jason);
+addToBillBtn.addEventListener('click', textBillFact);

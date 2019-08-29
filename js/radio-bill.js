@@ -18,10 +18,10 @@ var totalTwoElement = document.querySelector(".totalTwo");
 
 var callsTotalTwo = 0;
 var smsTotal = 0;
-console.log(radioBillAddBtnElement);
+//console.log(radioBillAddBtnElement);
 function radioBillTotal(){
 var checkedRadioBtn = document.querySelector("input[name='billItemType']:checked");
-console.log(checkedRadioBtn);
+//console.log(checkedRadioBtn);
     if (checkedRadioBtn) {
         var billItemType = checkedRadioBtn.value
         

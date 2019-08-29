@@ -1,10 +1,4 @@
-// get a reference to the sms or call radio buttons
 
-//get a reference to the add button
-
-//create a variable that will keep track of the total bill
-
-//add an event listener for when the add button is pressed
 
 //in the event listener get the value from the billItemTypeRadio radio buttons
 // * add the appropriate value to the running total
@@ -22,10 +16,10 @@ var radioNum = FactoryRadioBillText();
 var callsTotalTwo = 0;
 var smsTotal = 0;
 
-var templateSource = document.querySelector(".userTextTemplate").innerHTML;
+var templateSources = document.querySelector(".userTextTemplate").innerHTML;
 
 // compile the template
-var userTemplate = Handlebars.compile(templateSource);
+var userTemplate = Handlebars.compile(templateSources);
 
 var userDataElem = document.querySelector(".userData2"); 
 
@@ -52,3 +46,12 @@ userDataElem.innerHTML = userData2HTML;
 
 
 radioBillAddBtnElement.addEventListener('click', radioBillTotal);
+
+window.onload = function(){
+        var userData2HTML = userTemplate({
+    call :"R" + radioNum.radioCall(),
+    sms : 'R' + radioNum.radioSms(),
+    total : 'R'  + radioNum.radioBillTotal()
+});
+userDataElem.innerHTML = userData2HTML;
+}
